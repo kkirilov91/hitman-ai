@@ -204,7 +204,8 @@ Shooting.shoot = function(x, y, direction) {
 Shooting.isPlayerShooted = function(nextToBullit){
 	if(nextToBullit[0] === 0 && nextToBullit[1] === 255 && nextToBullit[2] === 0 && nextToBullit[3] === 255) {
 			//shootted, return custom event -> may be later
-			alert("Player down!");
+			level--;
+			alert("You die! You are back to level: " + level);
 			return true;
 	}
 

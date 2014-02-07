@@ -72,8 +72,8 @@ function Player(x, y, color, inStepSize, inPlayerSize){
 		      case 32:
 		        if(playerLastDirection === 37) Shooting.shootLeft(cx - soldierSize, cy);
 		        if(playerLastDirection === 38) Shooting.shootUp(cx, cy - soldierSize);
-		        if(playerLastDirection === 39) Shooting.shootRight(cx + soldierSize + soldierSize, cy);
-		        if(playerLastDirection === 40) Shooting.shootDown(cx, cy + soldierSize + soldierSize);
+		        if(playerLastDirection === 39) Shooting.shootRight(cx + 2 * soldierSize, cy);
+		        if(playerLastDirection === 40) Shooting.shootDown(cx, cy + 2 * soldierSize);
 		      break;
 		    }
 		});

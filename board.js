@@ -10,23 +10,50 @@ var stepMove = 20;
 var cx = startX,
 cy = startY;
 
-var player = new Player();
+var SPEED_PER_LEVEL = [0, 300, 300, 200, 200, 150, 150, 100, 100, 90, 90, 85, 85, 80, 80, 75, 75];
 
-var isPlayerAlive = true;
+var player;
+var isPlayerAlive;
+var level = 7;
 
-generateBoard();
-var numberOfSoldiers = 4;
+var numberOfSoldiers;
 var soldiers = [];
 var numberOfDead = 0;
+var soldierSpeed;
 
-for(i=0; i<numberOfSoldiers; i++){
-  soldiers[i] = new SoldierAI();
+generateBoard();
+
+initDifficulty();
+initSoldiers();
+
+
+function initSoldiers() {
+  player = new Player();
+  isPlayerAlive = true;
+  numberOfDead = 0;
+
+  player.start();
+  soldiers.forEach(function(soldier){
+    soldier.startAI();
+  });
+
 }
 
-player.start();
-soldiers.forEach(function(soldier){
-  soldier.startAI();
-});
+function initDifficulty(){
+  if(level > 16) {
+    level = 16;
+  }
+  soldiers = [];
+
+  numberOfSoldiers = Math.floor(level/2) + 1;
+
+  for(i=0; i<numberOfSoldiers; i++){
+      soldiers[i] = new SoldierAI();
+  }
+
+  soldierSpeed = SPEED_PER_LEVEL[level];
+
+}
 
 function restart() {
   isPlayerAlive = false;
@@ -39,6 +66,8 @@ function restart() {
     isPlayerAlive = true;
     generateBoard();
     numberOfDead = 0;
+
+    initDifficulty();
 
     player.restart();
     

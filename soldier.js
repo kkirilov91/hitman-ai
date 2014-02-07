@@ -55,7 +55,7 @@ var SoldierAI = function(x, y, color, size){
 			}
 
 			soldierAction();
-		}, 100);
+		}, soldierSpeed);
 	}
 
 	var fightOpponent = function(opponentCoords){
@@ -92,9 +92,15 @@ var SoldierAI = function(x, y, color, size){
 		}
 
 		var rndIndex = generateRandomNumber(0, availablePos.length-1);
-		var nextMove = availablePos[rndIndex];
+		var nextMove = {};
+		nextMove = availablePos[rndIndex] || {};
 		
 		ctx.fillStyle = soldierColor;
+		if(undefined === nextMove || undefined === nextMove.x || undefined === nextMove.y) {
+			nextMove.x = currX;
+			nextMove.y = currY;
+		}
+
 		move(currX, currY, nextMove.x, nextMove.y);
 
 		currX = nextMove.x;
@@ -186,7 +192,8 @@ var SoldierAI = function(x, y, color, size){
 	this.die = function() {
 		numberOfDead++;
 		if (numberOfDead === numberOfSoldiers) {
-			alert("You win");
+			level++;
+			alert("You win and go to te next level: " + level);
 			restart();
 		}
 		isSoldierAlive = false;
