@@ -43,6 +43,10 @@ function initDifficulty(){
   if(level > 16) {
     level = 16;
   }
+
+  if (level < 1)
+    level = 1;
+
   soldiers = [];
 
   numberOfSoldiers = Math.floor(level/2) + 1;
