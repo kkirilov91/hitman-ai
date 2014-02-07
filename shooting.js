@@ -25,12 +25,17 @@ Shooting.shootLeft = function(x,y) {
 			return;
 		}
 		
-		// if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
-		// 	//shootted, return custom event
-		// 	// alert("AI down!")
-		// 	// restart();
-		// 	return;
-		// }
+		
+		if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
+			//shootted, return custom event
+			soldiers.forEach(function(soldier){
+	  			if(soldier.isInArea(x - bullitStep, y, bullittSize)){
+	  				soldier.die();
+	  			}
+			});
+
+			return;
+		}
 
 		ctx.clearRect(x, y, bullittSize, bullittSize);
         ctx.fillStyle="#000000";
@@ -64,12 +69,17 @@ Shooting.shootRight = function (x,y) {
 			return;
 		}
 		
-		// if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
-		// 	//shootted, return custom event
-		// 	// alert("AI down!")
-		// 	// restart();
-		// 	return;
-		// }
+		
+		if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
+			//shootted, return custom event
+			soldiers.forEach(function(soldier){
+	  			if(soldier.isInArea(x + bullitStep, y, bullittSize)){
+	  				soldier.die();
+	  			}
+			});
+
+			return;
+		}
 		
 		ctx.clearRect(x, y, bullittSize, bullittSize);
         ctx.fillStyle="#000000";
@@ -103,12 +113,18 @@ Shooting.shootUp = function(x,y) {
 			return;
 		}
 
-		// if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
-		// 	//shootted, return custom event
-		// 	// alert("AI down!")
-		// 	// restart();
-		// 	return;
-		// }
+		
+		if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
+			//shootted, return custom event
+			soldiers.forEach(function(soldier){
+	  			if(soldier.isInArea(x, y - bullitStep, bullittSize)){
+	  				soldier.die();
+	  			}
+			});
+
+			return;
+		}
+
 		ctx.clearRect(x, y, bullittSize, bullittSize);
         ctx.fillStyle="#000000";
     	ctx.fillRect(x, y - bullitStep, bullittSize, bullittSize);
@@ -148,12 +164,16 @@ Shooting.shootDown = function(x,y) {
 		// 	return;
 		// }
 
-		// if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
-		// 	//shootted, return custom event
-		// 	// alert("AI down!")
-		// 	// restart();
-		// 	return;
-		// }
+		if(nextToBullit[0] === 0 && nextToBullit[1] === 0 && nextToBullit[2] === 255 && nextToBullit[3] === 255) {
+			//shootted, return custom event
+			soldiers.forEach(function(soldier){
+	  			if(soldier.isInArea(x, y + bullitStep, bullittSize)){
+	  				soldier.die();
+	  			}
+			});
+
+			return;	
+		}
 		
 		ctx.clearRect(x, y, bullittSize, bullittSize);
         ctx.fillStyle="#000000";
@@ -171,19 +191,19 @@ Shooting.shootDown = function(x,y) {
 
 Shooting.shoot = function(x, y, direction) {
 	if (directions.LEFT === direction){
-		Shooting.shootLeft(x,y);
+		Shooting.shootLeft(x - bullittSize - 1,y);
 	} else if (directions.RIGHT === direction) {
-		Shooting.shootRight(x,y);
+		Shooting.shootRight(x + 35, y);
 	} else if (directions.UP === direction) {
-		Shooting.shootUp(x,y);
+		Shooting.shootUp(x,y - bullittSize - 1);
 	} else if (directions.DOWN === direction) {
-		Shooting.shootDown(x,y);
+		Shooting.shootDown(x,y + 35);
 	}
 };
 
 Shooting.isPlayerShooted = function(nextToBullit){
 	if(nextToBullit[0] === 0 && nextToBullit[1] === 255 && nextToBullit[2] === 0 && nextToBullit[3] === 255) {
-			//shootted, return custom event
+			//shootted, return custom event -> may be later
 			alert("Player down!");
 			return true;
 	}

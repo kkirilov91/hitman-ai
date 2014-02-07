@@ -22,13 +22,19 @@ var SoldierAI = function(x, y, color, size){
 	var seen = false;
 	var soldierColor = color;
 	var soldierSize = size;
+	var isSoldierAlive = true;
 	var sightValidator = new SightValidator();
+
 	this.visitedPositions = null;
 	
 	//private
 	
 	var soldierAction = function() {
 		if (!isPlayerAlive) {
+			return;
+		}
+		if (!isSoldierAlive) {
+			ctx.clearRect(currX, currY, soldierSize, soldierSize);
 			return;
 		}
 		setTimeout(function(){
@@ -49,14 +55,14 @@ var SoldierAI = function(x, y, color, size){
 			}
 
 			soldierAction();
-		},100);
+		}, 100);
 	}
 
 	var fightOpponent = function(opponentCoords){
 		
 		if (MoveValidator.isValidDirectedMove(currX, currY, opponentCoords.direction)){
 			ctx.fillStyle = soldierColor;
-			moveWithDirection(currX, currY, opponentCoords.direction);
+			// moveWithDirection(currX, currY, opponentCoords.direction);
 		}
 
 		Shooting.shoot(currX, currY, opponentCoords.direction);
@@ -138,6 +144,7 @@ var SoldierAI = function(x, y, color, size){
 
 	function start(){
 		visitedPositions = create2DArray(1000);
+		isSoldierAlive = true;
 		ctx.fillStyle = soldierColor;
 		ctx.fillRect(currX, currY, soldierSize, soldierSize);
 		markAsVisited(currX, currY);
@@ -165,4 +172,23 @@ var SoldierAI = function(x, y, color, size){
 		start();
 	}
 
+	this.isInArea = function(areaX, areaY, size) {
+
+
+		if((areaX + size >= currX) && (currX + soldierSize >= areaX)) {
+			if (((currY <= areaY + size)) && (currY + soldierSize >= areaY))
+				return true;
+		}
+		return false;
+
+	}
+
+	this.die = function() {
+		numberOfDead++;
+		if (numberOfDead === numberOfSoldiers) {
+			alert("You win");
+			restart();
+		}
+		isSoldierAlive = false;
+	}
 }

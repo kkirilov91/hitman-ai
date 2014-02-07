@@ -8,8 +8,6 @@ function moveWithDirection(cx,cy,direction){
   } else if (directions.DOWN === direction){
     moveDown(cx, cy);
   }
-
-  console.log(direction);
 }
 
 function moveLeft(cx,cy){
@@ -30,5 +28,5 @@ function moveDown(cx,cy){
 
 function move(cx,cy, nextX, nextY){
 	ctx.clearRect(cx, cy, soldierSize, soldierSize);
-    ctx.fillRect(nextX, nextY, soldierSize, soldierSize);
+  ctx.fillRect(nextX, nextY, soldierSize, soldierSize);
 }

@@ -1,7 +1,7 @@
 function Player(x, y, color, inStepSize, inPlayerSize){
 	//default values
-	x = typeof x !== "undefined" ? x : 1;
-	y = typeof y !== "undefined" ? y : 1;
+	x = typeof x !== "undefined" ? x : 0;
+	y = typeof y !== "undefined" ? y : 0;
 	color = typeof color !== "undefined" ? color : "#00FF00";
 	inPlayerSize = typeof inPlayerSize !== "undefined" ? inPlayerSize : 20;
 	inStepSize = typeof inStepSize !== "undefined" ? inStepSize : 20;
@@ -70,10 +70,10 @@ function Player(x, y, color, inStepSize, inPlayerSize){
 		      break;
 
 		      case 32:
-		        if(playerLastDirection === 37) Shooting.shootLeft(cx, cy);
-		        if(playerLastDirection === 38) Shooting.shootUp(cx, cy);
-		        if(playerLastDirection === 39) Shooting.shootRight(cx + soldierSize, cy);
-		        if(playerLastDirection === 40) Shooting.shootDown(cx, cy + soldierSize);
+		        if(playerLastDirection === 37) Shooting.shootLeft(cx - soldierSize, cy);
+		        if(playerLastDirection === 38) Shooting.shootUp(cx, cy - soldierSize);
+		        if(playerLastDirection === 39) Shooting.shootRight(cx + soldierSize + soldierSize, cy);
+		        if(playerLastDirection === 40) Shooting.shootDown(cx, cy + soldierSize + soldierSize);
 		      break;
 		    }
 		});
@@ -87,6 +87,6 @@ function Player(x, y, color, inStepSize, inPlayerSize){
 
 	this.restart = function() {
 		initParameters();
-		initKeys();
+		// initKeys();
 	}
 }

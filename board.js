@@ -17,6 +17,7 @@ var isPlayerAlive = true;
 generateBoard();
 var numberOfSoldiers = 4;
 var soldiers = [];
+var numberOfDead = 0;
 
 for(i=0; i<numberOfSoldiers; i++){
   soldiers[i] = new SoldierAI();
@@ -37,6 +38,7 @@ function restart() {
     ctx.clearRect(0, 0, 1000, 1000);
     isPlayerAlive = true;
     generateBoard();
+    numberOfDead = 0;
 
     player.restart();
     
