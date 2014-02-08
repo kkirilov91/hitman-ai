@@ -190,12 +190,15 @@ var SoldierAI = function(x, y, color, size){
 	}
 
 	this.die = function() {
-		numberOfDead++;
-		if (numberOfDead === numberOfSoldiers) {
-			level++;
-			alert("You win and go to te next level: " + level);
-			restart();
+		if (isSoldierAlive) {
+			isSoldierAlive = false;
+			numberOfDead++;
+			
+			if (numberOfDead === numberOfSoldiers) {
+				level++;
+				alert("You win and go to te next level: " + level);
+				restart();
+			}
 		}
-		isSoldierAlive = false;
 	}
 }

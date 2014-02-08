@@ -78,7 +78,7 @@ function restart() {
     soldiers.forEach(function(soldier){
       soldier.restartAI();
     });
-  },300);
+  }, 300);
 }
 
 function generateBoard() {
